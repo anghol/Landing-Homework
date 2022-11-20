@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&family=Merriweather:wght@400;700&display=swap');
+
+@mixin display-large {
+    font-family: var(--md-ref-typeface-title);
+    font-weight: var(--md-ref-typeface-weight-regular);
+    font-size: 57px;
+    line-height: 64px;
+    letter-spacing: 0;
+}
+
+@mixin title-large {
+    font-family: var(--md-ref-typeface-title);
+    font-weight: var(--md-ref-typeface-weight-bold);
+    font-size: 22px;
+    line-height: 28px;
+    letter-spacing: 0;
+}
+
+@mixin headline-medium {
+    font-family: var(--md-ref-typeface-plain);
+    font-weight: var(--md-ref-typeface-weight-regular);
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: 0;
+}
+
+@mixin body-large {
+    font-family: var(--md-ref-typeface-plain);
+    font-weight: var(--md-ref-typeface-weight-regular);
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+}
+
+:root {
+    --background-light: rgba(170, 219, 105, 0.4);
+    --on-background-light: #364A3E;
+    --surface-light: #5d2429;
+    --on-surface-light: rgba(231, 225, 220, 1);
+    --secondary-light: rgba(198, 185, 153, 1);
+    --on-secondary-light: #5d2429;
+    --button-hover-light: rgb(165, 154, 128);
+
+    --background-dark: #112518;
+    --on-background-dark: rgb(145, 175, 106);
+    --surface-dark: #41191c;
+    --on-surface-dark: rgb(200, 190, 191);
+    --secondary-dark: #41191c;
+    --on-secondary-dark: rgba(198, 185, 153, 1);
+    --button-hover-dark: #5d2429;
+
+    --md-ref-typeface-title: 'Merriweather';
+    --md-ref-typeface-plain: 'Exo 2';
+    --md-ref-typeface-weight-regular: 400;
+    --md-ref-typeface-weight-bold: 700;
+
+    --card-border-radius: 20px;
+    --background-opacity-light: 0.2;
+    --background-opacity-dark: 0.8;
+
+    @media(prefers-color-scheme: light) {
+        --background: var(--background-light);
+        --on-background: var(--on-background-light);
+        --surface: var(--surface-light);
+        --on-surface: var(--on-surface-light);
+        --secondary: var(--secondary-light);
+        --on-secondary: var(--on-secondary-light);
+        --button-hover: var(--button-hover-light);
+        --background-opacity: var(--background-opacity-light);
+    }
+      
+    @media(prefers-color-scheme: dark) {
+        --background: var(--background-dark);
+        --on-background: var(--on-background-dark);
+        --surface: var(--surface-dark);
+        --on-surface: var(--on-surface-dark);
+        --secondary: var(--secondary-dark);
+        --on-secondary: var(--on-secondary-dark);
+        --button-hover: var(--button-hover-dark);
+        --background-opacity: var(--background-opacity-dark);
+    }
+}
+
+body, html {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure {
+    margin: 0;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 100vh repeat(4, min-content);
+}
+
+.wrapper {
+    // Обертка для контента
+    padding-block: 50px;
+    padding-inline: 70px;
+    margin: 0 auto;
+    max-width: 1400px;
+
+    @media (max-width: 599px) {
+        padding-inline: 20px;   
+    }
+}
+
+.hero-block {
+    display: grid;
+    place-items: center;
+
+    background: no-repeat url('https://catherineasquithgallery.com/uploads/posts/2021-02/1612567244_132-p-estetichnie-kartinki-zelenogo-tsveta-161.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+
+    position: relative;
+    isolation: isolate;
+
+    // Радиальное затемнение фона градиентом
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 100%);
+        z-index: -1;
+    }
+}
+
+.hero-block .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    @include headline-medium;
+    color: var(--on-surface);
+
+    h1 {
+        @include display-large;
+    }
+
+    p {
+        max-width: 40ch;
+    }
+
+    .button {
+        background-color: var(--secondary);
+        padding-block: 0.75em;
+        padding-inline: 1.25em;
+        border-radius: 50px;
+        transition: 0.2s all;
+
+        color: var(--on-secondary);
+        text-decoration: none;
+
+        &:hover {
+            background-color: var(--button-hover);
+        }
+    }
+
+    @media (max-width: 599px) {
+        font-size: 20px;
+
+        h1 {
+            font-size: 45px;
+        }
+    }
+}
+
+.info-block {
+    background-color: var(--background);
+    color: var(--on-background);
+
+    .info-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+    h2 {
+        @include title-large;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    img {
+        height: 300px;
+        box-shadow: 40px -16px var(--on-background);
+
+        @media (max-width: 599px) {
+            height: 225px;
+            box-shadow: 20px -8px var(--on-background);
+        }
+    }
+
+    @media (max-width: 839px) {
+        .info-wrapper {
+            flex-flow: column-reverse;
+        }
+        
+        h2 {
+            margin-bottom: 40px;
+        }
+    }
+}
+
+.info-text {
+    @include body-large;
+
+    .fact {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        padding-block: 8px;
+        padding-inline: 16px 24px;
+        margin-bottom: 10px;
+    }
+
+    .fact:last-child {
+        margin-bottom: 0;
+    }
+
+    .fact-icon {
+        flex: 60px 0 0;
+        aspect-ratio: 1;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        &.icon-choose {
+            background-image: url('img/choose.svg');
+        }
+
+        &.icon-medal {
+            background-image: url('img/medal.svg');
+        }
+
+        &.icon-study {
+            background-image: url('img/student.svg');
+        }
+
+        &.icon-idea {
+            background-image: url('img/idea.svg');
+        }
+
+        &.icon-heart {
+            background-image: url('img/heart.svg');
+        }
+    }
+}
+
+.interests-block {
+    position: relative;
+    isolation: isolate;
+    color: var(--on-surface);
+    background-image: url('https://img.freepik.com/premium-vector/frog-seamless-pattern-background_42349-35.jpg?w=740');
+
+    &::after {
+        // Полупрозрачный фон
+        position: absolute;
+        opacity: var(--background-opacity);
+        content: '';
+        inset: 0;
+        z-index: -1;
+        background-color: var(--background);
+    }
+
+    h2 {
+        @include title-large;
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--on-background);
+    }
+}
+
+.interests {
+    box-sizing: border-box;
+
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 200px;
+    gap: 16px;
+
+    grid-template-areas:
+        "interest-1 interest-1 interest-1 interest-2"
+        "interest-3 interest-3 interest-4 interest-2"
+        "interest-3 interest-3 interest-5 interest-5";
+
+    @include body-large;
+
+    @media (min-width: 600px) and (max-width: 839px) {
+        grid-template-areas:
+            "interest-1 interest-1 interest-1"
+            "interest-3 interest-3 interest-4"
+            "interest-3 interest-3 interest-2"
+            "interest-5 interest-5 interest-2";
+    }
+
+    @media (max-width: 599px) {
+        grid-template-areas:
+            "interest-1"
+            "interest-2"
+            "interest-3"
+            "interest-4"
+            "interest-5";
+    }
+}
+
+.some-interest-fig {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--card-border-radius);
+
+    &::after {
+        // Затемнение картинки сверху
+        display: block;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: rgba(21, 24, 36, 0.4);
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+    }
+
+    &:hover .some-interest-pic {
+        transform: scale(1.05);
+    }
+
+    &:nth-child(1) {
+        grid-area: interest-1;
+    }
+
+    &:nth-child(2) {
+        grid-area: interest-2;
+    }
+
+    &:nth-child(3) {
+        grid-area: interest-3;
+    }
+
+    &:nth-child(4) {
+        grid-area: interest-4;
+    }
+
+    &:nth-child(5) {
+        grid-area: interest-5;
+    }
+
+    .some-interest-pic {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: 0.15s all;
+    }
+
+    .some-interest-title {
+        position: absolute;
+        bottom: 27px;
+        left: 29px;
+        z-index: 3;
+    }
+}
+
+.contacts-block {
+    @include body-large;
+    background-color: var(--background);
+    color: var(--on-background);
+    
+    h2 {
+        @include title-large;
+        text-align: center;
+        margin-bottom: 30px;   
+    }
+
+    .contacts {
+        display: flex;
+        flex-direction: column;
+
+        width: min(85%, 300px);
+        margin-inline: auto;
+    }
+}
+
+.some-contact {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 40px;
+    padding-block: 10px;
+
+    border-bottom: 2px solid var(--on-background);
+
+    &:last-child {
+        border-bottom: 0;
+    }
+
+    & > a {
+        text-decoration: none;
+        color: currentColor;
+
+        &:hover {
+            color: var(--on-secondary);
+        }
+    }
+}
+
+.some-contact-icon {
+    position: relative;
+    height: inherit;
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &.vk {
+        background-image: url('img/vk.png');
+    }
+
+    &.tg {
+        background-image: url('img/telegram.png');
+    }
+
+    &.gh {
+        background-image: url('img/github.png');
+    }
+
+    a {
+        position: absolute;
+        inset: 0;
+    }
+
+    &:has(a:hover) {
+        opacity: 0.8;
+    }
+}
+
+.rights-block {
+    @include body-large;
+    background-color: var(--surface);
+    color: var(--on-surface);
+
+    @media (max-width: 599px) {
+        text-align: center;
+    }
+}
